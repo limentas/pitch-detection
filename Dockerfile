@@ -13,7 +13,10 @@ gcc \
 g++ \
 libboost-dev \
 libarmadillo-dev \
+libensmallen-dev \
+libcereal-dev \
 libmlpack-dev \
+libgflags-dev \
 libgtest-dev \
 libbenchmark-dev
 
@@ -21,6 +24,15 @@ libbenchmark-dev
 RUN cd /usr/src \
 && git clone https://github.com/anthonix/ffts.git ffts-repo \
 && cd ffts-repo \
+&& mkdir build \
+&& cd build \
+&& cmake .. \
+&& make install
+
+# Get and install libnyquist library
+RUN cd /usr/src \
+&& git clone https://github.com/ddiakopoulos/libnyquist libnyquist-repo \
+&& cd libnyquist-repo \
 && mkdir build \
 && cd build \
 && cmake .. \

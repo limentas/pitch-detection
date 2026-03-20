@@ -16,44 +16,35 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3 -march=native -flto")
 include_directories(include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/test)
 
-find_package(mlpack REQUIRED)
 find_package(FFTS REQUIRED)
-
+find_package(Armadillo REQUIRED)
 # Assuming FFTS does not have a built-in find module
 
 # Add the library target
 file(GLOB_RECURSE LIB_SOURCES "src/*.cpp")
 add_library(pitch_detection SHARED ${LIB_SOURCES})
 target_link_libraries(pitch_detection PUBLIC
-    ${MLPACK_LIBRARIES}
+    ${ARMADILLO_LIBRARIES}
     ${FFTS_LIBRARIES})
 
-find_package(gflags QUIET)
-find_package(libnyquist QUIET)
+find_package(gflags REQUIRED)
+find_package(libnyquist REQUIRED)
 find_package(PkgConfig QUIET)
-pkg_search_module(OPUS QUIET opus)
-pkg_search_module(WAVPACK QUIET wavpack)
 
-if(gflags_FOUND AND OPUS_FOUND AND WAVPACK_FOUND AND libnyquist_FOUND)
+if(gflags_FOUND AND libnyquist_FOUND)
     file(GLOB WAV_ANALYZER_SOURCES "wav_analyzer/*.cpp")
     add_executable(wav_analyzer ${WAV_ANALYZER_SOURCES})
     target_link_libraries(wav_analyzer PRIVATE
         pitch_detection
         ${GFLAGS_LIBRARIES}
-        ${OPUS_LIBRARIES}
-        ${WAVPACK_LIBRARIES}
         libnyquist)
 
     target_include_directories(wav_analyzer PRIVATE
         ${GFLAGS_INCLUDE_DIRS}
-        ${OPUS_INCLUDE_DIRS}
-        ${WAVPACK_INCLUDE_DIRS}
-        ${LIBNYQUIST_INCLUDE_DIRS})
+        /usr/src/libnyquist-repo/include/)
 
     link_directories(
         ${GFLAGS_LIBRARY_DIRS}
-        ${OPUS_LIBRARY_DIRS}
-        ${WAVPACK_LIBRARY_DIRS}
         ${LIBYNQUIST_LIBRARY_DIRS})
 endif()
 
