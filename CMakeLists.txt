@@ -17,14 +17,12 @@ include_directories(include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/test)
 
 find_package(FFTS REQUIRED)
-find_package(Armadillo REQUIRED)
 # Assuming FFTS does not have a built-in find module
 
 # Add the library target
 file(GLOB_RECURSE LIB_SOURCES "src/*.cpp")
 add_library(pitch_detection SHARED ${LIB_SOURCES})
 target_link_libraries(pitch_detection PUBLIC
-    ${ARMADILLO_LIBRARIES}
     ${FFTS_LIBRARIES})
 
 find_package(gflags REQUIRED)
@@ -50,7 +48,6 @@ endif()
 
 include(CTest)
 find_package(GTest QUIET)
-find_package(opus QUIET)
 find_package(lib QUIET)
 if(GTEST_FOUND)
     enable_testing()
