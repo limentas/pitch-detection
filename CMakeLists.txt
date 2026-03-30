@@ -25,8 +25,8 @@ add_library(pitch_detection SHARED ${LIB_SOURCES})
 target_link_libraries(pitch_detection PUBLIC
     ${FFTS_LIBRARIES})
 
-find_package(gflags REQUIRED)
-find_package(libnyquist REQUIRED)
+find_package(gflags QUIET)
+find_package(libnyquist QUIET)
 find_package(PkgConfig QUIET)
 
 if(gflags_FOUND AND libnyquist_FOUND)
