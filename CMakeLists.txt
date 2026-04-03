@@ -18,7 +18,8 @@ endif()
 include_directories(include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/test)
 
-find_package(mlpack REQUIRED)
+find_path(MLPACK_INCLUDE_DIRS "mlpack.hpp")
+target_include_directories(pitch_detection PRIVATE ${MLPACK_INCLUDE_DIRS})
 find_package(unofficial::ffts REQUIRED)
 # Assuming FFTS does not have a built-in find module
 
