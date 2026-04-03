@@ -22,28 +22,28 @@ peak_picking(const std::vector<T> &nsdf)
 	std::vector<int> max_positions{};
 	int pos = 0;
 	int cur_max_pos = 0;
-	ssize_t size = nsdf.size();
+	size_t size = nsdf.size();
 
-	while (pos < (size - 1) / 3 && nsdf[pos] > 0)
+	while (pos*3 + 1 < size && nsdf[pos] > 0)
 		pos++;
-	while (pos < size - 1 && nsdf[pos] <= 0.0)
+	while (pos + 1 < size && nsdf[pos] <= 0.0)
 		pos++;
 
 	if (pos == 0)
 		pos = 1;
 
-	while (pos < size - 1) {
+	while (pos + 1 < size) {
 		if (nsdf[pos] > nsdf[pos - 1] && nsdf[pos] >= nsdf[pos + 1] &&
 		    (cur_max_pos == 0 || nsdf[pos] > nsdf[cur_max_pos])) {
 			cur_max_pos = pos;
 		}
 		pos++;
-		if (pos < size - 1 && nsdf[pos] <= 0) {
+		if (pos + 1 < size && nsdf[pos] <= 0) {
 			if (cur_max_pos > 0) {
 				max_positions.push_back(cur_max_pos);
 				cur_max_pos = 0;
 			}
-			while (pos < size - 1 && nsdf[pos] <= 0.0) {
+			while (pos + 1 < size && nsdf[pos] <= 0.0) {
 				pos++;
 			}
 		}

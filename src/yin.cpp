@@ -32,7 +32,7 @@ template <typename T>
 static int
 absolute_threshold(const std::vector<T> &yin_buffer)
 {
-	ssize_t size = yin_buffer.size();
+	size_t size = yin_buffer.size();
 	int tau;
 	for (tau = 2; tau < size; tau++) {
 		if (yin_buffer[tau] < YIN_THRESHOLD) {
@@ -50,7 +50,7 @@ template <typename T>
 static std::vector<std::pair<T, T>>
 probabilistic_threshold(const std::vector<T> &yin_buffer, int sample_rate)
 {
-	ssize_t size = yin_buffer.size();
+	size_t size = yin_buffer.size();
 	int tau;
 
 	std::map<int, T> t0_with_probability;
