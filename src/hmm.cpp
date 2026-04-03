@@ -130,7 +130,7 @@ detail::build_hmm()
 		emissions[i].Probabilities()[i] = 1.0;
 	}
 
-	auto hmm = mlpack::HMM<mlpack::DiscreteDistribution<>>(initial, transition, emissions);
+	auto hmm = mlpack::HMM(initial, transition, emissions);
 	return hmm;
 }
 
