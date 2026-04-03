@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 #set_property(GLOBAL PROPERTY GRAPHVIZ_EXPORT_TARGETS TRUE)
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    set(CMAKE_CXX_FLAGS "-Wall -Wextra -ansi -pedantic -fext-numeric-literals -fopenmp")
+    set(CMAKE_CXX_FLAGS "-Wall -Wextra -ansi -pedantic -fopenmp")
     set(CMAKE_CXX_FLAGS_DEBUG "-g")
     set(CMAKE_CXX_FLAGS_RELEASE "-O3 -march=native -flto")
 endif()
