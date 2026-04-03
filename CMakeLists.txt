@@ -9,21 +9,24 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # use this for dependency graph generation
 #set_property(GLOBAL PROPERTY GRAPHVIZ_EXPORT_TARGETS TRUE)
 
-set(CMAKE_CXX_FLAGS "-Wall -Wextra -ansi -pedantic -fext-numeric-literals -fopenmp")
-set(CMAKE_CXX_FLAGS_DEBUG "-g")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -march=native -flto")
+if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    set(CMAKE_CXX_FLAGS "-Wall -Wextra -ansi -pedantic -fext-numeric-literals -fopenmp")
+    set(CMAKE_CXX_FLAGS_DEBUG "-g")
+    set(CMAKE_CXX_FLAGS_RELEASE "-O3 -march=native -flto")
+endif()
 
 include_directories(include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/test)
 
-find_package(FFTS REQUIRED)
+find_package(mlpack REQUIRED)
+find_package(unofficial::ffts REQUIRED)
 # Assuming FFTS does not have a built-in find module
 
 # Add the library target
 file(GLOB_RECURSE LIB_SOURCES "src/*.cpp")
 add_library(pitch_detection SHARED ${LIB_SOURCES})
-target_link_libraries(pitch_detection PUBLIC
-    ${FFTS_LIBRARIES})
+target_include_directories(pitch_detection PRIVATE ${FFTS_INCLUDE_DIR})
+target_link_libraries(pitch_detection PRIVATE ${FFTS_LIBRARY_RELEASE})
 
 find_package(gflags QUIET)
 find_package(libnyquist QUIET)
