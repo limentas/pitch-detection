@@ -15,7 +15,7 @@ template <typename T>
 std::vector<size_t>
 bin_pitches(const std::vector<std::pair<T, T>>);
 
-mlpack::HMM<mlpack::DiscreteDistribution>
+mlpack::HMM<mlpack::DiscreteDistribution<>>
 build_hmm();
 
 void
@@ -78,7 +78,7 @@ class BaseAlloc
 	std::vector<std::complex<float>> out_im;
 	ffts_plan_t *fft_forward;
 	ffts_plan_t *fft_backward;
-	mlpack::HMM<mlpack::DiscreteDistribution> hmm;
+	mlpack::HMM<mlpack::DiscreteDistribution<>> hmm;
 
 	BaseAlloc(long audio_buffer_size)
 	    : nfft(audio_buffer_size),
@@ -184,7 +184,7 @@ acorr_r(const std::vector<T> &, pitch_alloc::BaseAlloc *);
 
 template <typename T>
 T
-pitch_from_hmm(mlpack::HMM<mlpack::DiscreteDistribution>,
+pitch_from_hmm(mlpack::HMM<mlpack::DiscreteDistribution<>>,
     const std::vector<std::pair<T, T>>);
 } // namespace util
 
