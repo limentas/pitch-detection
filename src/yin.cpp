@@ -170,14 +170,14 @@ pitch::pyin(const std::vector<T> &audio_buffer, int sample_rate)
 template class pitch_alloc::Yin<double>;
 template class pitch_alloc::Yin<float>;
 
-template double
+template
 pitch::yin<double>(const std::vector<double> &audio_buffer, int sample_rate);
 
-template float
+template
 pitch::yin<float>(const std::vector<float> &audio_buffer, int sample_rate);
 
-template double
+template
 pitch::pyin<double>(const std::vector<double> &audio_buffer, int sample_rate);
 
-template float
+template
 pitch::pyin<float>(const std::vector<float> &audio_buffer, int sample_rate);
