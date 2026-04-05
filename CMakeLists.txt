@@ -18,17 +18,21 @@ endif()
 include_directories(include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/test)
 
-find_package(unofficial-linkotec-ffts CONFIG REQUIRED)
-# Assuming FFTS does not have a built-in find module
-
 # Add the library target
 file(GLOB_RECURSE LIB_SOURCES "src/*.cpp")
 add_library(pitch_detection SHARED ${LIB_SOURCES})
 target_compile_definitions(pitch_detection PRIVATE PITCH_DETECTION_EXPORTS)
 find_path(MLPACK_INCLUDE_DIRS "mlpack.hpp")
 target_include_directories(pitch_detection PRIVATE ${MLPACK_INCLUDE_DIRS})
-target_include_directories(pitch_detection PRIVATE ${FFTS_INCLUDE_DIR})
-target_link_libraries(pitch_detection PRIVATE ${FFTS_LIBRARY_RELEASE})
+
+if(BUILD_FOR_VCPKG)
+    find_package(unofficial-linkotec-ffts CONFIG REQUIRED)
+    target_include_directories(pitch_detection PRIVATE ${FFTS_INCLUDE_DIR})
+    target_link_libraries(pitch_detection PRIVATE ${FFTS_LIBRARY_RELEASE})
+else()
+    find_package(FFTS REQUIRED)
+    # Assuming FFTS does not have a built-in find module
+endif()
 
 find_package(gflags QUIET)
 find_package(libnyquist QUIET)

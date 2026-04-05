@@ -9,12 +9,14 @@
 #include <vector>
 
 #if defined(_WIN32) || defined(__CYGWIN__)
-    #ifdef PITCH_DETECTION_EXPORTS // Define this only when BUILDING the DLL
+	#define TEMPLATE_EXTERN
+    #ifdef PITCH_DETECTION_EXPORTS
         #define PITCH_DETECTION_API __declspec(dllexport)
     #else
         #define PITCH_DETECTION_API __declspec(dllimport)
     #endif
 #else
+	#define TEMPLATE_EXTERN extern
     #if __GNUC__ >= 4
         #define PITCH_DETECTION_API __attribute__ ((visibility ("default")))
     #else
@@ -51,22 +53,55 @@ namespace pitch
 
 template <typename T>
 T
-PITCH_DETECTION_API yin(const std::vector<T> &, int);
+yin(const std::vector<T> &, int);
+
+TEMPLATE_EXTERN template
+float
+yin<float>(const std::vector<float> &audio_buffer, int sample_rate);
+
+TEMPLATE_EXTERN template
+double
+yin<double>(const std::vector<double> &audio_buffer, int sample_rate);
 
 template <typename T>
 T
-PITCH_DETECTION_API mpm(const std::vector<T> &, int);
+mpm(const std::vector<T> &, int);
+
+TEMPLATE_EXTERN template
+float
+mpm<float>(const std::vector<float> &audio_buffer, int sample_rate);
+
+TEMPLATE_EXTERN template
+double
+mpm<double>(const std::vector<double> &audio_buffer, int sample_rate);
 
 /*
  * pyin and pmpm emit pairs of pitch/probability
  */
 template <typename T>
 T
-PITCH_DETECTION_API pyin(const std::vector<T> &, int);
+pyin(const std::vector<T> &, int);
+
+TEMPLATE_EXTERN template
+float
+pyin<float>(const std::vector<float> &audio_buffer, int sample_rate);
+
+TEMPLATE_EXTERN template
+double
+pyin<double>(const std::vector<double> &audio_buffer, int sample_rate);
 
 template <typename T>
 T
-PITCH_DETECTION_API pmpm(const std::vector<T> &, int);
+pmpm(const std::vector<T> &, int);
+
+TEMPLATE_EXTERN template
+float
+pmpm<float>(const std::vector<float> &audio_buffer, int sample_rate);
+
+TEMPLATE_EXTERN template
+double
+pmpm<double>(const std::vector<double> &audio_buffer, int sample_rate);
+
 } // namespace pitch
 
 /*
