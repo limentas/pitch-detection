@@ -55,11 +55,11 @@ template <typename T>
 T
 yin(const std::vector<T> &, int);
 
-TEMPLATE_EXTERN template
+TEMPLATE_EXTERN template PITCH_DETECTION_API
 float
 yin<float>(const std::vector<float> &audio_buffer, int sample_rate);
 
-TEMPLATE_EXTERN template
+TEMPLATE_EXTERN template PITCH_DETECTION_API
 double
 yin<double>(const std::vector<double> &audio_buffer, int sample_rate);
 
@@ -67,11 +67,11 @@ template <typename T>
 T
 mpm(const std::vector<T> &, int);
 
-TEMPLATE_EXTERN template
+TEMPLATE_EXTERN template PITCH_DETECTION_API
 float
 mpm<float>(const std::vector<float> &audio_buffer, int sample_rate);
 
-TEMPLATE_EXTERN template
+TEMPLATE_EXTERN template PITCH_DETECTION_API
 double
 mpm<double>(const std::vector<double> &audio_buffer, int sample_rate);
 
@@ -82,11 +82,11 @@ template <typename T>
 T
 pyin(const std::vector<T> &, int);
 
-TEMPLATE_EXTERN template
+TEMPLATE_EXTERN template PITCH_DETECTION_API
 float
 pyin<float>(const std::vector<float> &audio_buffer, int sample_rate);
 
-TEMPLATE_EXTERN template
+TEMPLATE_EXTERN template PITCH_DETECTION_API
 double
 pyin<double>(const std::vector<double> &audio_buffer, int sample_rate);
 
@@ -94,11 +94,11 @@ template <typename T>
 T
 pmpm(const std::vector<T> &, int);
 
-TEMPLATE_EXTERN template
+TEMPLATE_EXTERN template PITCH_DETECTION_API
 float
 pmpm<float>(const std::vector<float> &audio_buffer, int sample_rate);
 
-TEMPLATE_EXTERN template
+TEMPLATE_EXTERN template PITCH_DETECTION_API
 double
 pmpm<double>(const std::vector<double> &audio_buffer, int sample_rate);
 
