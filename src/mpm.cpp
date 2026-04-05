@@ -180,14 +180,14 @@ pitch::pmpm(const std::vector<T> &audio_buffer, int sample_rate)
 template class pitch_alloc::Mpm<double>;
 template class pitch_alloc::Mpm<float>;
 
-template
+template double
 pitch::mpm<double>(const std::vector<double> &audio_buffer, int sample_rate);
 
-template
+template float
 pitch::mpm<float>(const std::vector<float> &audio_buffer, int sample_rate);
 
-template
+template double
 pitch::pmpm<double>(const std::vector<double> &audio_buffer, int sample_rate);
 
-template
+template float
 pitch::pmpm<float>(const std::vector<float> &audio_buffer, int sample_rate);

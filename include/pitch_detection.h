@@ -8,6 +8,20 @@
 #include <stdexcept>
 #include <vector>
 
+#if defined(_WIN32) || defined(__CYGWIN__)
+    #ifdef PITCH_DETECTION_EXPORTS // Define this only when BUILDING the DLL
+        #define PITCH_DETECTION_API __declspec(dllexport)
+    #else
+        #define PITCH_DETECTION_API __declspec(dllimport)
+    #endif
+#else
+    #if __GNUC__ >= 4
+        #define PITCH_DETECTION_API __attribute__ ((visibility ("default")))
+    #else
+        #define PITCH_DETECTION_API
+    #endif
+#endif
+
 /* ignore me plz */
 namespace detail
 {
@@ -37,22 +51,22 @@ namespace pitch
 
 template <typename T>
 T
-yin(const std::vector<T> &, int);
+PITCH_DETECTION_API yin(const std::vector<T> &, int);
 
 template <typename T>
 T
-mpm(const std::vector<T> &, int);
+PITCH_DETECTION_API mpm(const std::vector<T> &, int);
 
 /*
  * pyin and pmpm emit pairs of pitch/probability
  */
 template <typename T>
 T
-pyin(const std::vector<T> &, int);
+PITCH_DETECTION_API pyin(const std::vector<T> &, int);
 
 template <typename T>
 T
-pmpm(const std::vector<T> &, int);
+PITCH_DETECTION_API pmpm(const std::vector<T> &, int);
 } // namespace pitch
 
 /*
