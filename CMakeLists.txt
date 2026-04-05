@@ -24,6 +24,7 @@ find_package(unofficial-linkotec-ffts CONFIG REQUIRED)
 # Add the library target
 file(GLOB_RECURSE LIB_SOURCES "src/*.cpp")
 add_library(pitch_detection SHARED ${LIB_SOURCES})
+target_compile_definitions(pitch_detection PRIVATE PITCH_DETECTION_EXPORTS)
 find_path(MLPACK_INCLUDE_DIRS "mlpack.hpp")
 target_include_directories(pitch_detection PRIVATE ${MLPACK_INCLUDE_DIRS})
 target_include_directories(pitch_detection PRIVATE ${FFTS_INCLUDE_DIR})
