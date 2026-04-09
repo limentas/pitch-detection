@@ -18,6 +18,10 @@ util::acorr_r(const std::vector<T> &audio_buffer, pitch_alloc::BaseAlloc *ba)
 		    ba->out_im.begin(),
 		    [](T x) -> std::complex<T> { return std::complex<T>(x, 0.0f); });
 		ffts_execute(ba->fft_forward, ba->out_im.data(), ba->out_im.data());
+		for(auto i = 0; i < 10 && i < ba->out_im.size(); ++i) {
+			std::cout << "1 ba->out_im[" << i << "]: " << ba->out_im[i] << ", ";
+		}
+		std::cout << std::endl;
 	}
 
 	std::complex<float> scale = 1.0f / static_cast<float>(ba->nfft);
@@ -36,6 +40,10 @@ util::acorr_r(const std::vector<T> &audio_buffer, pitch_alloc::BaseAlloc *ba)
 		    ba->out_real.begin(), [](const std::complex<float> &cplx) -> T {
 			    return std::real(cplx);
 		    });
+		for(auto i = 0; i < 10 && i < ba->out_im.size(); ++i) {
+			std::cout << "2 ba->out_im[" << i << "]: " << ba->out_im[i] << ", ";
+		}
+		std::cout << std::endl;
 	}
 }
 
