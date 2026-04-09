@@ -131,6 +131,8 @@ pitch_alloc::Mpm<T>::pitch(const std::vector<T> &audio_buffer, int sample_rate)
 
 	T highest_amplitude = -FLT_MAX;
 
+	std::cout << "max_positions: " << max_positions.size() << std::endl;
+
 	for (int i : max_positions) {
 		highest_amplitude =
 		    std::max(highest_amplitude, static_cast<T>(this->out_real[i]));
@@ -140,6 +142,8 @@ pitch_alloc::Mpm<T>::pitch(const std::vector<T> &audio_buffer, int sample_rate)
 			highest_amplitude = std::max(highest_amplitude, std::get<1>(x));
 		}
 	}
+
+	std::cout << "estimates: " << estimates.size() << std::endl;
 
 	if (estimates.empty())
 		return -1;
@@ -157,6 +161,8 @@ pitch_alloc::Mpm<T>::pitch(const std::vector<T> &audio_buffer, int sample_rate)
 	T pitch_estimate = (sample_rate / period);
 
 	this->clear();
+
+	std::cout << "pitch_estimate: " << pitch_estimate << std::endl;
 
 	return (pitch_estimate > MPM_LOWER_PITCH_CUTOFF) ? pitch_estimate : -1;
 }
