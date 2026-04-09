@@ -124,7 +124,15 @@ template <typename T>
 T
 pitch_alloc::Mpm<T>::pitch(const std::vector<T> &audio_buffer, int sample_rate)
 {
+	std::cout << "audio_buffer.size(): " << audio_buffer.size() << std::endl;
+	
 	util::acorr_r(audio_buffer, this);
+
+	std::cout << "this->out_real.size(): " << this->out_real.size() << std::endl;
+	for (auto i = 0; i < this->out_real.size() && i < 10; ++i) {
+		std::cout << "this->out_real[" << i << "]: " << std::fixed << this->out_real[i] << ", ";
+	}
+	std::cout << std::endl;
 
 	std::vector<int> max_positions = peak_picking(this->out_real);
 	std::vector<std::pair<T, T>> estimates;
